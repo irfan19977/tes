@@ -13,53 +13,7 @@
                         <h3 class="text-lg font-medium">DAFTAR PRODUCT</h3>
                         <a href="{{ route('products.create') }}" class="btn btn-success">ADD PRODUCT</a>
                     </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border">IMAGE</th>
-                                    <th class="px-4 py-2 border">TITLE</th>
-                                    <th class="px-4 py-2 border">PRICE</th>
-                                    <th class="px-4 py-2 border">STOCK</th>
-                                    <th class="px-4 py-2 border" style="width: 20%">ACTIONS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($products as $product)
-                                    <tr>
-                                        <td class="px-4 py-2 border text-center">
-                                            <img src="{{ asset('storage/products/' . $product->image) }}" class="rounded" style="width: 150px">
-                                        </td>
-                                        <td class="px-4 py-2 border">{{ $product->title }}</td>
-                                        <td class="px-4 py-2 border">{{ 'Rp ' . number_format($product->price, 2, ',', '.') }}</td>
-                                        <td class="px-4 py-2 border">{{ $product->stock }}</td>
-                                        <td class="px-4 py-2 border text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline">
-                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary">EDIT</a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="px-4 py-2 border text-center">
-                                            <div class="alert alert-danger">
-                                                Data Products belum ada.
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="mt-4">
-                        {{ $products->links() }}
-                    </div>
+                    <livewire:product-search />
                 </div>
             </div>
         </div>
